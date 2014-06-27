@@ -1,0 +1,1 @@
+g++ -o chat chat.c -lpthread -lcrypto -lm IniFile.cpp -O2 -Wall -DDEBUG

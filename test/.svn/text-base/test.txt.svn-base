@@ -1,0 +1,33 @@
+    function ex_send() {
+        socket.send(_root.data.toString());
+        stop();
+    }
+    function ex_close() {
+        socket.close();
+        stop();
+    }
+    function ex_connect() {
+        socket.connect(_root.host, _root.port);
+        stop();
+    }
+    function ex_test() {
+    }
+    var host;
+    var port;
+    var socket = new XMLSocket();
+    ifFrameLoaded (1) {
+        flash.external.ExternalInterface.call("SocketOnInit");
+    }
+    socket.onData = function (src) {
+        flash.external.ExternalInterface.call("SocketOnData", src.toString());
+    };
+    socket.onConnect = function (success) {
+        flash.external.ExternalInterface.call("SocketOnConnect", success.toString());
+    };
+    socket.onClose = function () {
+        flash.external.ExternalInterface.call("SocketOnClose");
+    };
+    flash.external.ExternalInterface.addCallback("test", null, ex_test);
+    flash.external.ExternalInterface.addCallback("send", null, ex_send);
+    flash.external.ExternalInterface.addCallback("close", null, ex_close);
+    flash.external.ExternalInterface.addCallback("connect", null, ex_connect);

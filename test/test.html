@@ -1,0 +1,123 @@
+<html>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE>socket</TITLE>
+<style>
+.title {
+	font-face:Verdana,Arial,sans-serif;
+	font-size:24px;
+	color:white;
+	}
+.standard {
+	font-face:Verdana,Arial,sans-serif;
+	font-size:16px;
+	color:white;
+	}
+</style>
+</HEAD>
+<script language="javascript">
+ //socket连接端
+ function SocketOnInit(){};
+ //当有数据进入
+ function SocketOnData(data){
+ 	   //alert(data);
+ 	   //data.replace("##","");
+     document.getElementById("aaa").value += "\n"+data;
+     document.getElementById("aaa").scrollTop = document.getElementById("aaa").scrollHeight;
+ }
+
+ //连接状态
+ function SocketOnConnect(success){
+
+     if(success=="true"){
+         document.getElementById("output").value += "\n true";
+     } else{
+         document.getElementById("output").value += "\n failed"+success;
+     }
+ }
+//当连接失败
+ function SocketOnClose(){
+     document.getElementById("output").value += "\n Connection closed";
+ }
+
+//主动关闭
+ function SocketClose(){
+     window.document.socket.close();
+ }
+//发起连接
+function SocketConnect(host,port){
+	   //window.document.socket.SetVariable("data", "test");
+     window.document.socket.SetVariable("host", host);
+     window.document.socket.SetVariable("port", port);
+     window.document.socket.connect();
+}
+
+//发送数据
+function SocketSend(data){
+
+ 	   //data=data+"##";
+ 	   //data=escape(data);
+     window.document.socket.SetVariable("data", data);
+     window.document.socket.send();
+}
+//发送系统消息
+function SocketSend_S(key,data){
+ 	   data=key+"|XXOO|"+data+"|3838438";
+     window.document.socket.SetVariable("data", data);
+     window.document.socket.send();
+}
+</script>
+<BODY bgcolor="#ffffff">
+<table width="100%"><tr><td align="center">
+<table style="border:1px solid black" cellpadding="15" width="500" bgcolor="#8e5275">
+<tr><td>
+<table width="100%" bgcolor="#eeeeee" style="border:1px solid black">
+<tr>
+  <td width="75%">
+    <input type="text" style="width:100%" name="nickname" id="nickname" value="uid" onClick="this.value='';">
+  </td>
+  <td width="25%">
+  <input style="width:100%" type="button" value="Connect" onClick="SocketConnect('192.168.1.4',8888);">
+  </td>
+</tr><tr>
+  <td height="150" colspan="2">
+  	<textarea style="width:100%;height:100%;background-color:#ddd" id="aaa" name="aaa">ceshi</textarea>
+  </td>
+</tr>
+<tr>
+  <td height="150" colspan="2">
+  	<textarea style="width:100%;height:100%;background-color:#ddd" id="output" name="output">ceshi</textarea>
+  </td>
+</tr>
+<tr>
+  <td width="75%">
+    <input type="text" style="width:100%" name="input" id="input" value="J|lengyan|20|1">
+  </td>
+  <td width="25%">
+  <input type="button" style="width:100%" name="send" value="Send" onClick="SocketSend(document.getElementById('input').value);">
+  </td>
+</tr>
+<tr>
+  <td width="75%">
+  	<input type="text" style="width:100%" name="keykey" id="keykey" value="">
+    <input type="text" style="width:100%" name="input2" id="input2" value="系统运行正常，欢迎大家的光临！">
+  </td>
+  <td width="25%">
+  <input type="button" style="width:100%" name="send" value="Send" onClick="SocketSend_S(document.getElementById('keykey').value,document.getElementById('input2').value);">
+  </td>
+</tr>
+</table>
+</td></tr>
+<tr><td>
+<p>
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="0" height="0" id="socket" align="middle">
+	<param name="allowScriptAccess" value="always" />
+	<param name="allowFullScreen" value="false" />
+	<param name="movie" value="test.swf" />
+	<param name="quality" value="high" />
+	<param name="bgcolor" value="#ffffff" />
+	<param name="allowNetworking" value="all" />
+	<embed src="test.swf" quality="high" bgcolor="#ffffff" width="0" height="0" name="socket" align="middle" allowScriptAccess="always" allowFullScreen="false" allowNetworking="all" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+	</object>
+</BODY>
+</HTML>
