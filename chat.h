@@ -29,15 +29,13 @@
 	编译命令:g++ -o chat chat.c -lpthread -lcrypto -lm IniFile.cpp -O2 -Wall
 	DEBUG编译:g++ -o chat chat.c -lpthread -lcrypto -lm IniFile.cpp -Wall -DDEBUG -g
 	内存泄露:/usr/local/webserver/valgrind/bin/valgrind --tool=memcheck --leak-check=full ./chat -c config.ini
-	开发人员:王伟
-	修改日期:2010-03-29
 --------------------------------------------------------------------------------------
 */
 
 /*
 --------------------------------------------------------------------------------------
 	协议
-	采用:字符串
+	采用:字符串 //更换协议！？
 --------------------------------------------------------------------------------------
 */
 
